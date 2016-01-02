@@ -1,17 +1,8 @@
 import * as types from '../constants'
 
-export function initNewMove(active) {
+export function initMove(active) {
     return { type: types.INIT_MOVE, active }
 }
-
-
-export function initMove(active) {
-    return (dispatch, getState) => {
-        return dispatch(initNewMove(active));
-    };
-}
-
-
 
 export function updateMoves(moves) {
     return { type: types.UPDATE_MOVES, moves }
@@ -28,12 +19,15 @@ export function updateSpeed(speed) {
 export function newGame() {
     return { type: types.NEW_GAME }
 }
+
 export function addMove(move) {
     return { type: types.ADD_MOVE, move }
 }
+
 export function incrementLevel() {
     return { type: types.INCREMENT_LEVEL }
 }
+
 export function gameOver() {
     return { type: types.OVER_GAME }
 }
