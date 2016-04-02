@@ -1,7 +1,7 @@
 {
-    "name": "simon-says-example",
+    "name": "simon-says-react-game",
     "version": "0.0.1",
-    "description": "Simon says example",
+    "description": "Simon says react game",
     "dependencies": {
         "react": "^0.14.0",
         "react-dom": "^0.14.0",

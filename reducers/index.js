@@ -3,8 +3,8 @@ import board from './board'
 import game from './game'
 
 const rootReducer = combineReducers({
-    board,
-    game
+  board,
+  game
 })
 
 export default rootReducer

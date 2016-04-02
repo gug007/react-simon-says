@@ -14,13 +14,13 @@ app.use(webpackHotMiddleware(compiler))
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
 app.get("/", function(req, res) {
-    res.sendFile(__dirname + '/index.html')
+  res.sendFile(__dirname + '/index.html')
 })
 
 app.listen(port, function(error) {
-    if (error) {
-        console.error(error)
-    } else {
-        console.info(" Listening on port %s.", port, port)
-    }
+  if (error) {
+    console.error(error)
+  } else {
+    console.info(" Listening on port %s.", port, port)
+  }
 })
