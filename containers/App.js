@@ -7,58 +7,58 @@ import * as actions from '../actions'
 class App extends Component{
   constructor(props) {
     super(props);
-    this.actions =  bindActionCreators(actions, this.props.dispatch)
+    this.actions = bindActionCreators(actions, this.props.dispatch);
   }
 
   move(moves, i) {
+    const { initMove, changePlayer } = this.actions;
     const { speed } = this.props.game;
-    this.actions.initMove(moves[i])
-    setTimeout(()=>{
-      this.actions.initMove(0);
+    initMove(moves[i])
+    setTimeout(() => {
+      initMove(0);
       i < moves.length
         ? setTimeout(() => this.move(moves, ++i) , 30)
-        : this.actions.changePlayer(true);
+        : changePlayer(true);
     }, speed*1000)
   }
 
   getMoves(level) {
+    const { updateMoves } = this.actions;
     const [min, max] = [1, 4];
-    let moves = [];
-    for (let i=0; i<level; i++){
-      let rand = Math.round(min + Math.random() * (max - min))
-      moves.push(rand);
-    }
-    return this.actions.updateMoves(moves).moves
+    const moves = new Array(level).fill().map((val, i) => {
+      return Math.round(min + Math.random() * (max - min))
+    });
+    return updateMoves(moves).moves
   }
 
   handleStart() {
-    this.actions.newGame();
-    this.move(this.getMoves(1), 0);
+    const { newGame } = this.actions;
+    newGame()
+    this.move(this.getMoves(1), 0)
   }
 
   handleClick(e) {
-    this.actions.initMove(parseInt(e.target.id))
-    setTimeout(()=> this.actions.initMove(0) , 500)
-    let { pressedMoves, moves, level } = this.props.game;
-    this.actions.addMove(e.target.id);
-    if(moves[pressedMoves.length-1] == e.target.id) {
-      if(pressedMoves.length === moves.length){
-        console.log('new level')
+    const { initMove, addMove, gameOver } = this.actions;
+    const { pressedMoves, moves, level } = this.props.game;
+    initMove(+e.target.id)
+    setTimeout(()=> initMove(0) , 500)
+    addMove(+e.target.id)
+    if(moves[pressedMoves.length] == e.target.id) {
+      if(pressedMoves.length+1 === moves.length)
         setTimeout(()=> this.move(this.getMoves(level+1), 0) , 500)
-      }
     } else {
-      this.actions.gameOver();
+      gameOver()
     }
   }
 
   handleChange(e){
-    this.actions.updateSpeed(e.target.value);
+    const { updateSpeed } = this.actions;
+    updateSpeed(e.target.value)
   }
 
   render(){
     const { items, active } = this.props.board;
     const { user, level, status, speed } = this.props.game;
-
     return (
       <div className="container">
         <div className="col-xs-12">

@@ -13,7 +13,7 @@ const initialState = {
 export default function board(state = initialState, action) {
   switch (action.type) {
     case INIT_MOVE:
-      return  Object.assign({}, state, { active: action.active })
+      return Object.assign({}, state, { active: action.active })
     default:
       return state
   }

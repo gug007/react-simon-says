@@ -20,7 +20,7 @@ const initialStateGame = {
 export default function game(state = initialStateGame, action) {
   switch (action.type) {
     case NEW_GAME:
-      return  Object.assign({}, state, {
+      return Object.assign({}, state, {
         user: false,
         moves: [],
         pressedMoves: [],
@@ -28,23 +28,24 @@ export default function game(state = initialStateGame, action) {
         level: 0
       })
     case OVER_GAME:
-      return  Object.assign({}, state, { user: false,
+      return Object.assign({}, state, { user: false,
         moves: [],
         pressedMoves: [],
         status: 'Game over',
         level: 0
       })
     case UPDATE_SPEED:
-      return  Object.assign({}, state, { speed: action.speed })
+      return Object.assign({}, state, { speed: action.speed })
     case ADD_MOVE:
-      let pressedMoves = state.pressedMoves; pressedMoves.push(parseInt(action.move, 10))
-      return  Object.assign({}, state, { pressedMoves: pressedMoves })
+      return Object.assign({}, state, {
+        pressedMoves: state.pressedMoves.concat([parseInt(action.move, 10)])
+      })
     case UPDATE_MOVES:
-      return  Object.assign({}, state, { user: false, moves: action.moves, level: ++state.level, pressedMoves: [] })
+      return Object.assign({}, state, { user: false, moves: action.moves, level: ++state.level, pressedMoves: [] })
     case INCREMENT_LEVEL:
-      return  Object.assign({}, state, { level: ++state.level })
+      return Object.assign({}, state, { level: ++state.level })
     case CHANGE_PLAYER:
-      return  Object.assign({}, state, { user: action.user })
+      return Object.assign({}, state, { user: action.user })
     default:
       return state
   }
