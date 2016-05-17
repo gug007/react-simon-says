@@ -38,7 +38,7 @@ export default function game(state = initialStateGame, action) {
       return Object.assign({}, state, { speed: action.speed })
     case ADD_MOVE:
       return Object.assign({}, state, {
-        pressedMoves: state.pressedMoves.concat([parseInt(action.move, 10)])
+        pressedMoves: state.pressedMoves.concat(action.move)
       })
     case UPDATE_MOVES:
       return Object.assign({}, state, { user: false, moves: action.moves, level: ++state.level, pressedMoves: [] })
